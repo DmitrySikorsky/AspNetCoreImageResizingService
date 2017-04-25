@@ -10,27 +10,30 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreImageResizingService
 {
-  public class ImageController :  Controller
+  public class ImageController : Controller
   {
     public async Task<IActionResult> Index(string url, int sourceX, int sourceY, int sourceWidth, int sourceHeight, int destinationWidth, int destinationHeight)
     {
-      Image sourceImage = await this.LoadImageFromUrl(url);
-
-      if (sourceImage != null)
+      using (Image sourceImage = await this.LoadImageFromUrl(url))
       {
-        try
+        if (sourceImage != null)
         {
-          Image destinationImage = this.CropImage(sourceImage, sourceX, sourceY, sourceWidth, sourceHeight, destinationWidth, destinationHeight);
-          Stream outputStream = new MemoryStream();
+          try
+          {
+            using (Image destinationImage = this.CropImage(sourceImage, sourceX, sourceY, sourceWidth, sourceHeight, destinationWidth, destinationHeight))
+            {
+              Stream outputStream = new MemoryStream();
 
-          destinationImage.Save(outputStream, ImageFormat.Jpeg);
-          outputStream.Seek(0, SeekOrigin.Begin);
-          return this.File(outputStream, "image/png");
-        }
+              destinationImage.Save(outputStream, ImageFormat.Jpeg);
+              outputStream.Seek(0, SeekOrigin.Begin);
+              return this.File(outputStream, "image/png");
+            }
+          }
 
-        catch
-        {
-          // Add error logging here
+          catch
+          {
+            // Add error logging here
+          }
         }
       }
 
@@ -43,10 +46,9 @@ namespace AspNetCoreImageResizingService
 
       try
       {
-        HttpClient httpClient = new HttpClient();
-        HttpResponseMessage response = await httpClient.GetAsync(url);
-        Stream inputStream = await response.Content.ReadAsStreamAsync();
-
+        using (HttpClient httpClient = new HttpClient())
+        using (HttpResponseMessage response = await httpClient.GetAsync(url))
+        using (Stream inputStream = await response.Content.ReadAsStreamAsync())
         using (Bitmap temp = new Bitmap(inputStream))
           image = new Bitmap(temp);
       }
@@ -62,14 +64,14 @@ namespace AspNetCoreImageResizingService
     private Image CropImage(Image sourceImage, int sourceX, int sourceY, int sourceWidth, int sourceHeight, int destinationWidth, int destinationHeight)
     {
       Image destinationImage = new Bitmap(destinationWidth, destinationHeight);
-      Graphics g = Graphics.FromImage(destinationImage);
 
-      g.DrawImage(
-        sourceImage,
-        new Rectangle(0, 0, destinationWidth, destinationHeight),
-        new Rectangle(sourceX, sourceY, sourceWidth, sourceHeight),
-        GraphicsUnit.Pixel
-      );
+      using (Graphics g = Graphics.FromImage(destinationImage))
+        g.DrawImage(
+          sourceImage,
+          new Rectangle(0, 0, destinationWidth, destinationHeight),
+          new Rectangle(sourceX, sourceY, sourceWidth, sourceHeight),
+          GraphicsUnit.Pixel
+        );
 
       return destinationImage;
     }
