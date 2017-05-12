@@ -1,5 +1,8 @@
 # ASP.NET Core Sample Image Resizing Service
-This sample demonstrates how to build image resizing service on ASP.NET Core using the
+This is a demo web application for the
+“[ASP.NET Core Sample Image Resizing Service](http://sikorsky.pro/en/blog/aspnet-core-image-resizing-service)”
+post on the [Dmitry Sikorsky’s blog](http://sikorsky.pro/en/blog).
+It demonstrates how to build image resizing service on ASP.NET Core using the
 CoreCompat.System.Drawing package for the image processing.
 
 It downloads an image specified by the URL, crops it using the parameters (provided in the URL too),
