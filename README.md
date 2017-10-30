@@ -23,6 +23,8 @@ Usually I use something like this to prepare images for the mobile devices
 depending on their real screen resolutions and image container sizes. This allows to save the traffic and
 image downloading time. Also, it makes images look better because they don’t need any scaling.
 
+Updated to use .NET Core 2.0.
+
 ## Using the Application
 
 1. Run the application.
