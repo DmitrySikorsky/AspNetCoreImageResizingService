@@ -4,7 +4,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 
 namespace AspNetCoreImageResizingService
 {
@@ -15,19 +15,14 @@ namespace AspNetCoreImageResizingService
       services.AddMvc();
     }
 
-    public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
+    public void Configure(IApplicationBuilder applicationBuilder, IWebHostEnvironment webHostEnvironment)
     {
-      loggerFactory.AddConsole();
-      loggerFactory.AddDebug();
-
-      if (hostingEnvironment.IsDevelopment())
-      {
+      if (webHostEnvironment.IsDevelopment())
         applicationBuilder.UseDeveloperExceptionPage();
-        applicationBuilder.UseBrowserLink();
-      }
 
       applicationBuilder.UseStaticFiles();
-      applicationBuilder.UseMvcWithDefaultRoute();
+      applicationBuilder.UseRouting();
+      applicationBuilder.UseEndpoints(builder => builder.MapDefaultControllerRoute());
     }
   }
 }
