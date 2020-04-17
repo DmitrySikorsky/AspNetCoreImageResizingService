@@ -1,7 +1,7 @@
 # ASP.NET Core Sample Image Resizing Service
 This is a demo web application for the
-“[ASP.NET Core Sample Image Resizing Service](http://sikorsky.pro/en/blog/aspnet-core-image-resizing-service)”
-post on the [Dmitry Sikorsky’s blog](http://sikorsky.pro/en/blog).
+“[ASP.NET Core Sample Image Resizing Service](https://medium.com/@dmitry.a.sikorsky/asp-net-core-sample-image-resizing-service-538a7dfb2c15)”
+post on the [Dmitry Sikorsky’s blog](https://medium.com/@dmitry.a.sikorsky).
 It demonstrates how to build image resizing service on ASP.NET Core using the
 CoreCompat.System.Drawing package for the image processing.
 
@@ -9,14 +9,14 @@ It downloads an image specified by the URL, crops it using the parameters (provi
 and writes the cropped image into the output stream.
 
 This is the original photo of my cat:
-![Original photo of my cat](http://sikorsky.pro/images/github/aspnetcore-image-resizing-service/original.png)
+![Original photo of my cat](original.png)
 *Original photo of my cat*
 
 This is the URL used to crop the photo:
 http://localhost:60233/image?url=http://sikorsky.pro/images/my_cat.jpg&sourcex=240&sourcey=240&sourcewidth=360&sourceheight=360&destinationwidth=200&destinationheight=200
 
 And this is the cropped photo:
-![Cropped photo of my cat](http://sikorsky.pro/images/github/aspnetcore-image-resizing-service/cropped.png)
+![Cropped photo of my cat](cropped.png)
 *Cropped photo of my cat*
 
 Usually I use something like this to prepare images for the mobile devices
