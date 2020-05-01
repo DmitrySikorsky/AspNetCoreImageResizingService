@@ -1,7 +1,7 @@
 # ASP.NET Core Sample Image Resizing Service
 This is a demo web application for the
-ì[ASP.NET Core Sample Image Resizing Service](https://medium.com/@dmitry.a.sikorsky/asp-net-core-sample-image-resizing-service-538a7dfb2c15)î
-post on the [Dmitry Sikorskyís blog](https://medium.com/@dmitry.a.sikorsky).
+‚Äú[ASP.NET Core Sample Image Resizing Service](https://medium.com/@dmitrysikorsky/asp-net-core-sample-image-resizing-service-538a7dfb2c15)‚Äù
+post on the [Dmitry Sikorsky‚Äôs blog](https://medium.com/@dmitrysikorsky).
 It demonstrates how to build image resizing service on ASP.NET Core using the
 CoreCompat.System.Drawing package for the image processing.
 
@@ -21,7 +21,7 @@ And this is the cropped photo:
 
 Usually I use something like this to prepare images for the mobile devices
 depending on their real screen resolutions and image container sizes. This allows to save the traffic and
-image downloading time. Also, it makes images look better because they donít need any scaling.
+image downloading time. Also, it makes images look better because they don‚Äôt need any scaling.
 
 Updated to use .NET Core 3.1.
 
